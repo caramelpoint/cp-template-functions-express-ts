@@ -1,0 +1,30 @@
+# To use this example, delete the 'example.' prefix in the name of this file.
+# We recommend to use `sam deploy --guided` the first time to deploy the lambda and the modify the generated-
+# samconfig.toml like this example. That way you get the bucket identifier.
+version = 0.1
+# Apply to all environments
+[default]
+[default.deploy]
+[default.deploy.parameters]
+region = "us-east-1" # i.e.: "us-east-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+
+# This apply to the local enviroment trigger by the `npm run dev:lambda` script.
+[default.local_start_api.parameters]
+parameter_overrides = "VariableName=value" # Variables should be PascalCase, camelCase, canno't contain hifens or underscores.
+
+# An example for a Production environment.
+# Don't forget to pass `--config-env production` to the `npm run deploy` in your CI pipeline job.
+[production.deploy.parameters]
+stack_name = "hello-world"
+s3_bucket = "" # some bucket identifier.
+s3_prefix = "hello-world"
+
+# An example for a Staging environment.
+# Don't forget to pass `--config-env staging` to the `npm run deploy` in your CI pipeline job.
+[staging.deploy.parameters]
+stack_name = "hello-world-staging"
+s3_bucket = "" # some bucket identifier, could be the same for all environments.
+s3_prefix = "hello-world-staging"
